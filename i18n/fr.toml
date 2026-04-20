@@ -50,6 +50,9 @@ other = "Entrez votre message"
 [recent_posts]
 other = "Articles Récents"
 
+[view_all]
+other = "Voir tous"
+
 # Common terms
 [read]
 other = "Lire"

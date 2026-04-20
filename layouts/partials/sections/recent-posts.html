@@ -1,0 +1,44 @@
+{{ if .Site.Params.recent_posts.enable | default false }}
+{{- $recent_posts := .Site.Language.Params.recent_posts | default .Site.Params.recent_posts -}}
+{{- $section := $recent_posts.section | default "blog" -}}
+{{- $count := $recent_posts.count | default 3 -}}
+<section id="recent-posts" class="py-5">
+    <div class="container">
+        <h3 class="text-center pb-2">{{ $recent_posts.title | default .Site.Params.recent_posts.title | default (i18n "recent_posts") }}</h3>
+        <div class="row justify-content-center px-md-5">
+            {{ range first $count (where .Site.RegularPages "Type" $section).ByDate.Reverse }}
+            <div class="col-lg-4 col-md-6 my-3">
+                <div class="card h-100">
+                    {{ if .Params.image }}
+                    <div class="card-header">
+                        <a href="{{ .RelPermalink }}">
+                            <img src="{{ .Params.image }}" class="card-img-top" alt="{{ .Title }}">
+                        </a>
+                    </div>
+                    {{ end }}
+                    <div class="card-body bg-transparent p-4 shadow-sm">
+                        <a href="{{ .RelPermalink }}" class="primary-font card-title">
+                            <h5 class="card-title bg-transparent" title="{{ .Title }}">{{ .Title | truncate 40 }}</h5>
+                        </a>
+                        <div class="card-text secondary-font">
+                            <p>{{ .Summary | truncate 200 }}</p>
+                        </div>
+                    </div>
+                    <div class="mt-auto post-footer bg-transparent py-3">
+                        <span class="float-start bg-transparent">{{ .Date | time.Format (":date_long" | default "January 2, 2006") }}</span>
+                        <a href="{{ .RelPermalink }}" class="float-end btn btn-outline-info btn-sm">{{ .Site.Params.terms.read | default (i18n "read") }}</a>
+                    </div>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+        {{ with $recent_posts.viewAllUrl }}
+        <div class="text-center pt-3">
+            <a href="{{ . }}" class="btn btn-outline-primary">
+                {{ $recent_posts.viewAllText | default (i18n "view_all") }}
+            </a>
+        </div>
+        {{ end }}
+    </div>
+</section>
+{{ end }}
