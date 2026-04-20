@@ -1,0 +1,54 @@
+{{ if .Site.Params.giscus.repo }}
+{{ if .Site.Params.consent.enable | default true }}
+<div id="giscus"></div>
+<script>
+(function () {
+  function loadGiscus() {
+    if (window.__giscusLoaded) return;
+    window.__giscusLoaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://giscus.app/client.js';
+    s.async = true;
+    s.crossOrigin = 'anonymous';
+    s.setAttribute('data-repo', {{ .Site.Params.giscus.repo | jsonify }});
+    s.setAttribute('data-repo-id', {{ .Site.Params.giscus.repoId | jsonify }});
+    s.setAttribute('data-category', {{ .Site.Params.giscus.category | jsonify }});
+    s.setAttribute('data-category-id', {{ .Site.Params.giscus.categoryId | jsonify }});
+    s.setAttribute('data-mapping', {{ .Site.Params.giscus.mapping | default "pathname" | jsonify }});
+    s.setAttribute('data-strict', {{ .Site.Params.giscus.strict | default "0" | jsonify }});
+    s.setAttribute('data-reactions-enabled', {{ .Site.Params.giscus.reactions | default "1" | jsonify }});
+    s.setAttribute('data-emit-metadata', '0');
+    s.setAttribute('data-input-position', {{ .Site.Params.giscus.inputPosition | default "bottom" | jsonify }});
+    s.setAttribute('data-theme', {{ .Site.Params.giscus.theme | default "preferred_color_scheme" | jsonify }});
+    s.setAttribute('data-lang', {{ .Language.Lang | jsonify }});
+    document.getElementById('giscus').appendChild(s);
+  }
+  function tryLoad() {
+    if (window.consent && window.consent.has('comments')) loadGiscus();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tryLoad);
+  } else {
+    tryLoad();
+  }
+  window.addEventListener('consent:changed', tryLoad);
+})();
+</script>
+{{ else }}
+<script src="https://giscus.app/client.js"
+  data-repo="{{ .Site.Params.giscus.repo }}"
+  data-repo-id="{{ .Site.Params.giscus.repoId }}"
+  data-category="{{ .Site.Params.giscus.category }}"
+  data-category-id="{{ .Site.Params.giscus.categoryId }}"
+  data-mapping="{{ .Site.Params.giscus.mapping | default "pathname" }}"
+  data-strict="{{ .Site.Params.giscus.strict | default "0" }}"
+  data-reactions-enabled="{{ .Site.Params.giscus.reactions | default "1" }}"
+  data-emit-metadata="0"
+  data-input-position="{{ .Site.Params.giscus.inputPosition | default "bottom" }}"
+  data-theme="{{ .Site.Params.giscus.theme | default "preferred_color_scheme" }}"
+  data-lang="{{ .Language.Lang }}"
+  crossorigin="anonymous"
+  async>
+</script>
+{{ end }}
+{{ end }}

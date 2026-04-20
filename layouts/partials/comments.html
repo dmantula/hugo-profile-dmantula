@@ -1,0 +1,10 @@
+{{/* Per-post opt-out via `comments: false` in front matter.
+    Prefers Giscus if params.giscus.repo is set, otherwise falls back
+    to Disqus if Site.DisqusShortname is set. */}}
+{{ if .Params.comments | default true }}
+{{ if .Site.Params.giscus.repo }}
+{{ partial "giscus.html" . }}
+{{ else if site.Config.Services.Disqus.Shortname }}
+{{ template "_internal/disqus.html" . }}
+{{ end }}
+{{ end }}
