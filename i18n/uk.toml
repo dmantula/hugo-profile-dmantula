@@ -78,3 +78,28 @@ other = "Сторінку не знайдено"
 # Date formats
 [min_read]
 other = "хв читання"
+
+# Consent banner
+[consent_title]
+other = "Налаштування приватності"
+
+[consent_message]
+other = "Цей сайт використовує опційні cookies для аналітики та коментарів. Вони завантажуються лише за вашою згодою."
+
+[consent_analytics]
+other = "Аналітика (допомагає мені зрозуміти, які пости читають)"
+
+[consent_comments]
+other = "Коментарі (завантажує віджет коментарів на основі GitHub)"
+
+[consent_accept]
+other = "Прийняти все"
+
+[consent_customize]
+other = "Налаштувати"
+
+[consent_save]
+other = "Зберегти"
+
+[consent_reject]
+other = "Відхилити"

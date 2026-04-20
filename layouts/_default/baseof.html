@@ -10,6 +10,10 @@
     <link rel="stylesheet" href="{{ (printf "%sstyle.css" (.Site.Params.staticPath | default "")) | relURL }}">
   {{ end }}
 
+  {{ if .Site.Params.consent.enable | default true }}
+  <link rel="stylesheet" href="{{ (printf "%scss/consent.css" (.Site.Params.staticPath | default "")) | relURL }}">
+  {{ end }}
+
   <title>
     {{- block "title" . }} {{- end }}
   </title>
@@ -32,6 +36,8 @@
   {{- end -}}
 
   {{- partial "scripts.html" . -}}
+
+  {{- partial "consent-banner.html" . -}}
 
   <!-- for search -->
   <section id="search-content" class="py-2">

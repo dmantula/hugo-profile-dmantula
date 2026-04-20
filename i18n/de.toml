@@ -78,3 +78,28 @@ other = "Seite nicht gefunden"
 # Date formats
 [min_read]
 other = "Min. Lesezeit"
+
+# Consent banner
+[consent_title]
+other = "Datenschutz-Einstellungen"
+
+[consent_message]
+other = "Diese Seite verwendet optionale Cookies für Statistiken und Kommentare. Sie werden nur geladen, wenn du zustimmst."
+
+[consent_analytics]
+other = "Statistiken (zeigt mir, welche Beiträge gelesen werden)"
+
+[consent_comments]
+other = "Kommentare (lädt das GitHub-basierte Kommentar-Widget unter Beiträgen)"
+
+[consent_accept]
+other = "Alle akzeptieren"
+
+[consent_customize]
+other = "Anpassen"
+
+[consent_save]
+other = "Speichern"
+
+[consent_reject]
+other = "Ablehnen"

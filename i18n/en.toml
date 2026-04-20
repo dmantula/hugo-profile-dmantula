@@ -78,3 +78,28 @@ other = "Page not found"
 # Date formats
 [min_read]
 other = "min read"
+
+# Consent banner
+[consent_title]
+other = "Privacy preferences"
+
+[consent_message]
+other = "This site uses optional cookies for analytics and comments. They only load if you opt in."
+
+[consent_analytics]
+other = "Analytics (helps me understand which posts are read)"
+
+[consent_comments]
+other = "Comments (loads the GitHub-based comment widget on posts)"
+
+[consent_accept]
+other = "Accept all"
+
+[consent_customize]
+other = "Customize"
+
+[consent_save]
+other = "Save preferences"
+
+[consent_reject]
+other = "Reject"

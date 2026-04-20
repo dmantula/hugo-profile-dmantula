@@ -1,0 +1,22 @@
+{{ if .Site.Params.consent.enable | default true }}
+<aside id="consent-banner" class="consent-banner" role="dialog" aria-label="{{ i18n "consent_title" }}" aria-modal="false">
+  <p><strong>{{ i18n "consent_title" }}</strong></p>
+  <p>{{ i18n "consent_message" }}</p>
+  <div class="consent-detail">
+    <label>
+      <input type="checkbox" data-consent-cat="analytics">
+      {{ i18n "consent_analytics" }}
+    </label>
+    <label>
+      <input type="checkbox" data-consent-cat="comments">
+      {{ i18n "consent_comments" }}
+    </label>
+  </div>
+  <div class="consent-buttons">
+    <button type="button" data-consent-accept class="btn btn-sm btn-outline-primary">{{ i18n "consent_accept" }}</button>
+    <button type="button" data-consent-customize class="btn btn-sm btn-outline-secondary">{{ i18n "consent_customize" }}</button>
+    <button type="button" data-consent-save class="btn btn-sm btn-outline-primary">{{ i18n "consent_save" }}</button>
+    <button type="button" data-consent-reject class="btn btn-sm btn-outline-secondary">{{ i18n "consent_reject" }}</button>
+  </div>
+</aside>
+{{ end }}
