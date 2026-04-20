@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="{{ (printf "%scss/font.css" (.Site.Params.staticPath | default "")) | relURL }}" media="all">
 
 <!-- Internal templates -->
-{{ template "_internal/google_analytics.html" . }}
+{{ partial "google-analytics.html" . }}
 {{ template "_internal/opengraph.html" . }}
 {{ template "_internal/twitter_cards.html" . }}
 

@@ -1,0 +1,34 @@
+{{ $ga := site.Config.Services.GoogleAnalytics.ID }}
+{{ if $ga }}
+{{ if .Site.Params.consent.enable | default true }}
+<script>
+(function () {
+  var GA_ID = {{ $ga | jsonify }};
+  var loaded = false;
+  function loadGA() {
+    if (loaded) return;
+    loaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+  }
+  function tryLoad() {
+    if (window.consent && window.consent.has('analytics')) loadGA();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tryLoad);
+  } else {
+    tryLoad();
+  }
+  window.addEventListener('consent:changed', tryLoad);
+})();
+</script>
+{{ else }}
+{{ template "_internal/google_analytics.html" . }}
+{{ end }}
+{{ end }}
