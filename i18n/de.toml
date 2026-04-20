@@ -1,0 +1,80 @@
+# Navigation
+[nav_about]
+other = "Über mich"
+
+[nav_experience]
+other = "Berufserfahrung"
+
+[nav_education]
+other = "Ausbildung"
+
+[nav_projects]
+other = "Projekte"
+
+[nav_achievements]
+other = "Erfolge"
+
+[nav_contact]
+other = "Kontakt"
+
+[search_placeholder]
+other = "Suchen…"
+
+# Sections
+[about]
+other = "Über mich"
+
+[experience]
+other = "Berufserfahrung"
+
+[education]
+other = "Ausbildung"
+
+[projects]
+other = "Projekte"
+
+[achievements]
+other = "Erfolge"
+
+[contact]
+other = "Kontakt aufnehmen"
+
+# Contact form
+[contact_email_placeholder]
+other = "E-Mail eingeben"
+
+[contact_message_placeholder]
+other = "Nachricht eingeben"
+
+# Footer
+[recent_posts]
+other = "Neueste Beiträge"
+
+[view_all]
+other = "Alle anzeigen"
+
+# Common terms
+[read]
+other = "Lesen"
+
+[toc]
+other = "Inhaltsverzeichnis"
+
+[tags]
+other = "Schlagwörter"
+
+[social]
+other = "Soziale Netzwerke"
+
+[copyright]
+other = "Alle Rechte vorbehalten"
+
+[email_text]
+other = "Schau dir diese Seite an"
+
+[page_not_found]
+other = "Seite nicht gefunden"
+
+# Date formats
+[min_read]
+other = "Min. Lesezeit"

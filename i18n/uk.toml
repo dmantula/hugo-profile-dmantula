@@ -1,0 +1,80 @@
+# Navigation
+[nav_about]
+other = "Про мене"
+
+[nav_experience]
+other = "Досвід"
+
+[nav_education]
+other = "Освіта"
+
+[nav_projects]
+other = "Проєкти"
+
+[nav_achievements]
+other = "Досягнення"
+
+[nav_contact]
+other = "Контакти"
+
+[search_placeholder]
+other = "Пошук…"
+
+# Sections
+[about]
+other = "Про мене"
+
+[experience]
+other = "Досвід роботи"
+
+[education]
+other = "Освіта"
+
+[projects]
+other = "Проєкти"
+
+[achievements]
+other = "Досягнення"
+
+[contact]
+other = "Зв'язатися"
+
+# Contact form
+[contact_email_placeholder]
+other = "Введіть email"
+
+[contact_message_placeholder]
+other = "Введіть повідомлення"
+
+# Footer
+[recent_posts]
+other = "Останні публікації"
+
+[view_all]
+other = "Дивитися всі"
+
+# Common terms
+[read]
+other = "Читати"
+
+[toc]
+other = "Зміст"
+
+[tags]
+other = "Теги"
+
+[social]
+other = "Соцмережі"
+
+[copyright]
+other = "Усі права захищено"
+
+[email_text]
+other = "Подивись цей сайт"
+
+[page_not_found]
+other = "Сторінку не знайдено"
+
+# Date formats
+[min_read]
+other = "хв читання"
