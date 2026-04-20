@@ -176,7 +176,9 @@
                     {{end}}
                     {{end}}
 
+                    {{ if not (.Site.Params.navbar.disableLanguageSwitcher | default false) }}
                     {{- partial "sections/language-switcher.html" . -}}
+                    {{ end }}
 
                     {{ if (not .Site.Params.theme.disableThemeToggle | default false) }}
                     <li class="nav-item navbar-text">
