@@ -15,6 +15,12 @@
 #list-page .card a h5,
 #recent-posts .card a h5 {
     color: var(--text-color) !important;
+    /* Let titles wrap; clamp to 3 lines so super-long titles don't dominate the card */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #list-page .card:hover,
