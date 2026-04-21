@@ -11,8 +11,22 @@
   padding: 1rem 1.25rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   z-index: 9999;
+  font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
   font-size: 0.9rem;
-  line-height: 1.45;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.consent-banner p strong {
+  font-family: "Lora", Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+}
+
+.consent-banner .btn {
+  font-family: "Alata", "Roboto", sans-serif;
+  letter-spacing: 0.04em;
 }
 
 body.dark .consent-banner {
@@ -60,6 +74,41 @@ body.dark .consent-banner .consent-detail {
   flex-wrap: wrap;
   gap: 0.4rem;
   margin-top: 0.5rem;
+}
+
+/* Override Bootstrap blue/grey on the buttons so they fit the theme. */
+.consent-banner .btn {
+  background-color: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--text-secondary-color);
+}
+
+body.dark .consent-banner .btn {
+  color: var(--text-color-dark);
+  border-color: var(--text-secondary-color-dark);
+}
+
+.consent-banner .btn:hover,
+.consent-banner .btn:focus {
+  background-color: var(--secondary-background-color);
+  color: var(--text-color);
+  box-shadow: none;
+}
+
+body.dark .consent-banner .btn:hover,
+body.dark .consent-banner .btn:focus {
+  background-color: var(--secondary-background-color-dark);
+  color: var(--text-color-dark);
+}
+
+/* Make the primary action (Accept all) stand out a bit. */
+.consent-banner [data-consent-accept] {
+  border-color: var(--text-color);
+  font-weight: 600;
+}
+
+body.dark .consent-banner [data-consent-accept] {
+  border-color: var(--text-color-dark);
 }
 
 .consent-banner [data-consent-save] {
