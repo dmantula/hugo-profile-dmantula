@@ -28,10 +28,19 @@
 {{ template "_internal/opengraph.html" . }}
 {{ template "_internal/twitter_cards.html" . }}
 
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ .Permalink }}">
+
 <!-- Multilingual SEO -->
 {{ if hugo.IsMultilingual }}
   {{ range .AllTranslations }}
     <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}" title="{{ .Language.LanguageName }}">
+    {{/* x-default points at the site default. Hardcoded to "en" because Hugo
+         doesn't expose defaultContentLanguage to templates cleanly. Override
+         this partial in a theme fork if your default language is different. */}}
+    {{ if eq .Language.Lang "en" }}
+      <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+    {{ end }}
   {{ end }}
   <!-- OpenGraph locale -->
   <meta property="og:locale" content="{{ .Language.Lang }}">
@@ -39,6 +48,9 @@
     <meta property="og:locale:alternate" content="{{ .Language.Lang }}">
   {{ end }}
 {{ end }}
+
+<!-- Schema.org JSON-LD (Person on home, Article on posts, BreadcrumbList on lists) -->
+{{ partial "seo-jsonld.html" . }}
 
 <!-- stylesheets -->
 {{- if (or (eq .Site.Params.UseBootstrapCDN true) (eq .Site.Params.UseBootstrapCDN "css")) -}}

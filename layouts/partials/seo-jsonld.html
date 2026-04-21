@@ -1,0 +1,94 @@
+{{- /*
+  Schema.org JSON-LD emitter.
+  - Home page → Person (author identity, sameAs to socials)
+  - Single blog post → Article (headline, dates, image, author ref)
+  - Section/taxonomy list → BreadcrumbList (Home → list page)
+
+  Reads from site params:
+    params.author.name           (string, required for Person/Article)
+    params.author.alternateName  (list of strings, optional)
+    params.author.jobTitle       (string, optional)
+    params.author.worksFor       (string, optional)
+    params.author.url            (string, defaults to Site.Home.Permalink)
+    params.author.sameAs         (list of social profile URLs)
+    params.author.image          (URL string, optional)
+    params.hostName              (used for absolute URLs)
+*/ -}}
+
+{{- $author := site.Params.author | default dict -}}
+{{- $authorName := $author.name | default site.Title -}}
+{{- $authorURL := $author.url | default site.Home.Permalink -}}
+{{- $authorSchema := dict
+    "@type" "Person"
+    "name" $authorName
+    "url" $authorURL
+-}}
+{{- with $author.alternateName }}
+  {{- $authorSchema = merge $authorSchema (dict "alternateName" .) -}}
+{{- end -}}
+{{- with $author.jobTitle }}
+  {{- $authorSchema = merge $authorSchema (dict "jobTitle" .) -}}
+{{- end -}}
+{{- with $author.worksFor }}
+  {{- $authorSchema = merge $authorSchema (dict "worksFor" (dict "@type" "Organization" "name" .)) -}}
+{{- end -}}
+{{- with $author.image }}
+  {{- $authorSchema = merge $authorSchema (dict "image" .) -}}
+{{- end -}}
+{{- with $author.sameAs }}
+  {{- $authorSchema = merge $authorSchema (dict "sameAs" .) -}}
+{{- end -}}
+
+{{- if .IsHome -}}
+<script type="application/ld+json">
+{{- merge (dict "@context" "https://schema.org") $authorSchema | jsonify (dict "indent" "  ") | safeJS -}}
+</script>
+{{- end -}}
+
+{{- if and (eq .Kind "page") (eq .Section "blog") -}}
+{{- $imageURL := .Params.image -}}
+{{- if and $imageURL (not (hasPrefix $imageURL "http")) -}}
+  {{- $imageURL = printf "%s%s" (site.Params.hostName | default site.BaseURL) $imageURL -}}
+{{- end -}}
+{{- $articleSchema := dict
+    "@context" "https://schema.org"
+    "@type" "Article"
+    "headline" .Title
+    "datePublished" (.Date.Format "2006-01-02T15:04:05-07:00")
+    "dateModified" (.Lastmod.Format "2006-01-02T15:04:05-07:00")
+    "url" .Permalink
+    "mainEntityOfPage" .Permalink
+    "author" $authorSchema
+    "publisher" $authorSchema
+    "inLanguage" .Language.Lang
+-}}
+{{- with .Description }}
+  {{- $articleSchema = merge $articleSchema (dict "description" .) -}}
+{{- else }}
+  {{- with .Summary }}
+    {{- $articleSchema = merge $articleSchema (dict "description" (. | plainify | truncate 200)) -}}
+  {{- end }}
+{{- end -}}
+{{- with $imageURL }}
+  {{- $articleSchema = merge $articleSchema (dict "image" .) -}}
+{{- end -}}
+{{- with .Params.categories }}
+  {{- $articleSchema = merge $articleSchema (dict "articleSection" .) -}}
+{{- end -}}
+{{- with .Params.tags }}
+  {{- $articleSchema = merge $articleSchema (dict "keywords" (delimit . ", ")) -}}
+{{- end -}}
+<script type="application/ld+json">
+{{- $articleSchema | jsonify (dict "indent" "  ") | safeJS -}}
+</script>
+{{- end -}}
+
+{{- if or (eq .Kind "term") (and (eq .Kind "section") (ne .Section "")) -}}
+{{- $crumbs := slice
+    (dict "@type" "ListItem" "position" 1 "name" "Home" "item" site.Home.Permalink)
+    (dict "@type" "ListItem" "position" 2 "name" .Title "item" .Permalink)
+-}}
+<script type="application/ld+json">
+{{- dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $crumbs | jsonify (dict "indent" "  ") | safeJS -}}
+</script>
+{{- end -}}
