@@ -167,8 +167,24 @@
                     </li>
                     {{else}}
                     <!-- Single menu item -->
+                    {{- /* Language-switcher menu items use identifier prefix `lang-`
+                           followed by the target language code (e.g. `lang-en`).
+                           For these, resolve the current page's translation in
+                           that language and use its URL — so clicking "EN" on a
+                           UK blog post lands on the EN version of that very post,
+                           not the EN landing page. Falls back to the menu's
+                           hard-coded URL when no translation exists. */ -}}
+                    {{- $url := .URL -}}
+                    {{- if hasPrefix .Identifier "lang-" -}}
+                        {{- $targetLang := strings.TrimPrefix "lang-" .Identifier -}}
+                        {{- range $.AllTranslations -}}
+                            {{- if eq .Language.Lang $targetLang -}}
+                                {{- $url = .RelPermalink -}}
+                            {{- end -}}
+                        {{- end -}}
+                    {{- end -}}
                     <li class="nav-item navbar-text">
-                        <a class="nav-link" href="{{.URL}}" title="{{ .Title }}">
+                        <a class="nav-link" href="{{ $url }}" title="{{ .Title }}">
                             {{ .Pre }}
                             {{ .Name }}
                         </a>
