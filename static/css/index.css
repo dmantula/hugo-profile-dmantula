@@ -172,6 +172,32 @@ header .navbar.animate {
     color: var(--text-link-color) !important;
 }
 
+/* Credentials row — badges (certifications, etc.) under the social icons.
+   Same display size for visual harmony regardless of original aspect. */
+#hero .hero-credentials {
+    margin-top: 1rem;
+}
+
+#hero .credential-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+#hero .credential-badge img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+#hero .credential-badge:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
 #hero .hero-content > a::after {
     content: "";
     display: block;
