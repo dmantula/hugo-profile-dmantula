@@ -17,6 +17,17 @@
                     {{ $hero.content | markdownify }}
                 </p>
                 {{- partial "sections/hero/credentials.html" . -}}
+                {{/* Mobile-only portrait: appears between credentials and the
+                     button/social row when the hero columns stack vertically.
+                     Hidden at lg+ where the side-by-side image column shows. */}}
+                <div class="row justify-content-center d-lg-none">
+                    <div class="col-sm-8 col-md-6 pt-4 image {{ if .Site.Params.animate }}animate{{ end }} px-5 text-center">
+                        <img src="{{ .Site.Params.hero.image }}"
+                            class="img-thumbnail mx-auto{{ if .Site.Params.hero.roundImage }} rounded-circle{{ end }}"
+                            alt="{{ .Site.Params.title }} profile image"
+                        >
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-auto h-100">
                         {{ if .Site.Params.hero.button.enable }}
@@ -33,7 +44,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-4">
+            <div class="col-sm-12 col-md-12 col-lg-4 d-none d-lg-block">
                 <div class="row justify-content-center">
                     <div class="col-sm-12 col-md-9 pt-5 image {{ if .Site.Params.animate }}animate{{ end }} px-5 px-md-5 px-lg-0 text-center">
                         <img src="{{ .Site.Params.hero.image }}"
